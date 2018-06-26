@@ -1,0 +1,32 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+function kifibundle_form_system_logging_settings_alter(&$form, FormStateInterface $form_state) {
+  $config = Drupal::configFactory()->getEditable('kifibundle.logging');
+  $log_errors = $config->get('log_errors');
+
+  $form['kifibundle'] = [
+    '#tree' => true,
+    'log_errors' => [
+      '#type' => 'checkboxes',
+      '#title' => t('Logged HTTP errors'),
+      '#options' => [
+        403 => t('403 - Forbidden'),
+        404 => t('404 - Not Found'),
+      ],
+      '#default_value' => $log_errors,
+    ]
+  ];
+
+  $form['#submit'][] = 'kifibundle_logging_settings_submit';
+}
+
+function kifibundle_logging_settings_submit(&$form, FormStateInterface $form_state) {
+  $log_errors = $form_state->getValue(['kifibundle', 'log_errors']);
+  $log_errors = array_keys(array_filter($log_errors));
+
+  $config = Drupal::configFactory()->getEditable('kifibundle.logging');
+  $config->set('log_errors', array_filter($log_errors));
+  $config->save();
+}

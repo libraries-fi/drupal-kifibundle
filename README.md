@@ -1,2 +1,5 @@
-# kifibundle
-Miscellaneous components for our Drupal installation
+kifibundle
+=========
+
+Bundle of components for customizing our website. Not necessarily inteded to be general-purpose.
+

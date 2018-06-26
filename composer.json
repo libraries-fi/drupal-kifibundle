@@ -1,0 +1,6 @@
+{
+  "name": "libraries-fi/kifibundle",
+  "description": "Components for customizing Drupal.",
+  "type": "drupal-module",
+  "license": "GPL-2.0+"
+}
