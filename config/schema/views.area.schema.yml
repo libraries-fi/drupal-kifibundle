@@ -1,0 +1,7 @@
+views.area.kifibundle_twig_inline:
+  type: views_area
+  label: 'Inline template'
+  mapping:
+    content:
+      type: text
+      label: 'Template content'

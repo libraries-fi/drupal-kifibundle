@@ -30,3 +30,15 @@ function kifibundle_logging_settings_submit(&$form, FormStateInterface $form_sta
   $config->set('log_errors', array_filter($log_errors));
   $config->save();
 }
+
+function kifibundle_views_data() {
+  $data['views']['kifibundle_twig_inline'] = [
+    'title' => t('Inline template'),
+    'help' => t('Render text as template. Twig formatting is supported.'),
+    'area' => [
+      'id' => 'kifibundle_twig_inline'
+    ]
+  ];
+
+  return $data;
+}
