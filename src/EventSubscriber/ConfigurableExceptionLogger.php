@@ -2,10 +2,10 @@
 
 namespace Drupal\kifibundle\EventSubscriber;
 
+use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\EventSubscriber\ExceptionLoggingSubscriber;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 
 class ConfigurableExceptionLogger extends ExceptionLoggingSubscriber {
   protected $config;
@@ -16,13 +16,13 @@ class ConfigurableExceptionLogger extends ExceptionLoggingSubscriber {
     $this->config = $config->get('kifibundle.logging');
   }
 
-  public function on403(GetResponseForExceptionEvent $event) {
+  public function on403(ExceptionEvent $event) {
     if ($this->isLoggingEnabled(404)) {
       parent::on403($event);
     }
   }
 
-  public function on404(GetResponseForExceptionEvent $event) {
+  public function on404(ExceptionEvent $event) {
     if ($this->isLoggingEnabled(404)) {
       parent::on404($event);
     }
